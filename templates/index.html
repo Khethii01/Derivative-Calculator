@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derivative Calculator</title>
+
+    <!-- Include MathJax -->
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+<body>
+    <h1>Khethii's Derivative Calculator</h1>
+
+    <form action="/calculate_derivative" method="post">
+        <label for="expression">Enter the function: </label>
+        <input type="text" id="expression" name="expression" required>
+        <button type="submit">Calculate Derivative</button>
+    </form>
+
+    {% if expression %}
+        <p>Function: \( {{ expression|replace('**', '^')|replace('*', '')|e|safe }} \)</p>
+    {% endif %}
+
+    {% if result %}
+        <p>Result: \( {{ result|replace('**', '^')|replace('*', '')|e|safe }} \)</p>
+    {% endif %}
+</body>
+</html>
