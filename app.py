@@ -1,45 +1,29 @@
-# Import necessary modules from Flask and sympy libraries
 from flask import Flask, render_template, request
 from sympy import symbols, diff, simplify, latex
 
-# Create a Flask web application
 app = Flask(__name__)
 
-# Define a route for the main page (index)
-@app.route('/')
+@app.route('/') # route to main page(index.html)
 def index():
-    # Render the HTML template for the main page
-    return render_template('index.html')
+    return render_template('index.html') # render HTML template w/o results
 
-# Define a route for handling the derivative calculation
-@app.route('/calculate_derivative', methods=['POST'])
+@app.route('/calculate_derivative', methods=['POST']) # route to handle calculations
 def calculate_derivative():
-    # Get the mathematical expression from the form submitted by the user
     expression = request.form['expression']
 
-    # Define the variable 'x' for symbolic mathematics
     x = symbols('x')
 
     try:
-        # Evaluate the expression entered by the user
-        expr = eval(expression)
-
-        # Calculate the derivative of the expression
+        expr = eval(expression) # evaluate string as a python expression
         derivative = diff(expr, x)
-
-        # Simplify the result of the derivative calculation
         simplified_derivative = simplify(derivative)
-
-        # Convert the result to a string for displaying
-        result = str(simplified_derivative)
+        result = str(simplified_derivative) # convert result to string for displaying
 
     except Exception as e:
-        # Handle errors in case of invalid input or other exceptions
         result = f"Error: {str(e)}"
 
-    # Render the HTML template with the expression and result to display
-    return render_template('index.html', expression=expression, result=result)
+    return render_template('index.html', expression=expression, result=result) # render HTML template w/ results
 
-# Run the Flask application if the script is executed directly
+# start flask application with debugging enabled
 if __name__ == '__main__':
     app.run(debug=True)
