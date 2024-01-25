@@ -25,7 +25,7 @@
         {% endif %}
 
         {% if result %}
-            <p>Result: \[ {{ result|replace('**', '^')|replace('*', '')|e|safe }} \]</p>
+            <p>Result: \( {{ result|replace('**', '^')|replace('*', '')|e|safe }} \)</p>
         {% endif %}
 </body>
 </html>

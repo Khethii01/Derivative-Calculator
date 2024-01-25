@@ -3,11 +3,11 @@ from sympy import symbols, diff, simplify, latex
 
 app = Flask(__name__)
 
-@app.route('/') # route to main page(index.html)
+@app.route('/') 
 def index():
     return render_template('index.html') # render HTML template w/o results
 
-@app.route('/calculate_derivative', methods=['POST']) # route to handle calculations
+@app.route('/calculate_derivative', methods=['POST']) # route that handles calculations
 def calculate_derivative():
     expression = request.form['expression']
 
